@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:SearchHandlerDemo.Models"
+             xmlns:searchHandlers="clr-namespace:SearchHandlerDemo.SearchHandlers"
+             xmlns:viewModels="clr-namespace:SearchHandlerDemo.ViewModels"
+             xmlns:views="clr-namespace:SearchHandlerDemo.Views"
+             x:Class="SearchHandlerDemo.Views.StudentListView"
+             Title="StudentListView">
+    <Shell.SearchHandler>
+        <searchHandlers:StudentSearchHandler 
+            Placeholder="Search Name"
+            ShowsResults="True"
+            QueryIcon="search"
+            NavigationType="{x:Type views:StudentDetailView}"
+            ClearIcon="clear"
+            Students="{x:Static viewModels:StudentListViewModel.Students}">
+            <searchHandlers:StudentSearchHandler.ItemTemplate>
+                <DataTemplate x:DataType="models:StudentModel">
+                    <Grid Margin="5" RowDefinitions="Auto" ColumnDefinitions="40,Auto">
+                        <Image Grid.Row="0" Grid.Column="0" Source="user" HeightRequest="35" WidthRequest="35" />
+                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Name}" FontSize="18" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </searchHandlers:StudentSearchHandler.ItemTemplate>
+        </searchHandlers:StudentSearchHandler>
+    </Shell.SearchHandler>
+    <VerticalStackLayout VerticalOptions="Center" Padding="10">
+        <Label 
+            Text="Shell Search Handler Demo" FontSize="20"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>
